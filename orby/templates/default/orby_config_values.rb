@@ -1,3 +1,4 @@
+ENV['BONSAI_URL'] = "<%= @orby_config_values[:BONSAI_URL] %>" 
 ENV['FOURSQUARE_CLIENT_ID'] = "<%= @orby_config_values[:FOURSQUARE_CLIENT_ID] %>" 
 ENV['FOURSQUARE_CLIENT_SECRET'] = "<%= @orby_config_values[:FOURSQUARE_CLIENT_SECRET] %>" 
 ENV['KEEN_MASTER_KEY'] = "<%= @orby_config_values[:KEEN_MASTER_KEY] %>" 
