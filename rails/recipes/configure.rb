@@ -44,4 +44,5 @@ node[:deploy].each do |application, deploy|
       File.exists?("#{deploy[:deploy_to]}") && File.exists?("#{deploy[:deploy_to]}/shared/config/")
     end
   end
+  
 end
