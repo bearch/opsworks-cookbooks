@@ -7,7 +7,8 @@ node[:deploy].each do |application, deploy|
     action :nothing
   end
 
-  template "#{deploy[:deploy_to]}/shared/config/orby_config_values.rb" do
+  template "#{deploy[:deploy_to]}/current/config/initializers/00_orby_config_values.rb" do
+  # template "#{deploy[:deploy_to]}/shared/config/orby_config_values.rb" do
     source "orby_config_values.rb"
     cookbook 'orby'
     mode "0660"
@@ -17,9 +18,9 @@ node[:deploy].each do |application, deploy|
     variables(:orby_config_values => deploy[:orby_config_values])
 
     #create sym link
-    link "#{deploy[:deploy_to]}/current/config/initializers/00_orby_config_values.rb" do
-      to "#{deploy[:deploy_to]}/shared/config/orby_config_values.rb"
-    end
+    # link "#{deploy[:deploy_to]}/current/config/initializers/00_orby_config_values.rb" do
+    #   to "#{deploy[:deploy_to]}/shared/config/orby_config_values.rb"
+    # end
 
     notifies :run, "execute[restart Rails app #{application}]"
 
