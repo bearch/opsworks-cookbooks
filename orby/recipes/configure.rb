@@ -1,5 +1,3 @@
-include_recipe "deploy"
-
 node[:deploy].each do |application, deploy|
   deploy = node[:deploy][application]
 
