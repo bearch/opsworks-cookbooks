@@ -7,5 +7,5 @@ bash "install_bcrypt" do
     make
     make install
 EOC
-  if { ::File.exists?(extract_path) }
+  if { File.exists?(extract_path) }
 end
