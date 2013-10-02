@@ -6,6 +6,6 @@ bash "install_bcrypt" do
     ruby extconf.rb
     make
     make install
-  EOC
+EOC
   if { ::File.exists?(extract_path) }
 end
