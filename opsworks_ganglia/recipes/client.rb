@@ -28,6 +28,7 @@ when "debian"
 
 when "rhel"
   package node[:ganglia][:monitor_package_name]
+  package node[:ganglia][:monitor_plugins_package_name]
 end
 
 execute 'stop gmond with non-updated configuration' do
@@ -37,7 +38,25 @@ execute 'stop gmond with non-updated configuration' do
   )
 end
 
-['scripts','conf.d','python_modules'].each do |dir|
+# old broken installations have this empty directory
+# new working ones have a symlink
+directory "/etc/ganglia/python_modules" do
+  action :delete
+  not_if { ::File.symlink?("/etc/ganglia/python_modules")}
+end
+
+link "/etc/ganglia/python_modules" do
+  to value_for_platform_family(
+    "debian" => "/usr/lib/ganglia/python_modules",
+    "rhel" => "/usr/lib#{RUBY_PLATFORM[/64/]}/ganglia/python_modules"
+  )
+end
+
+execute "Normalize ganglia plugin permissions" do
+  command "chmod 644 /etc/ganglia/python_modules/*"
+end
+
+['scripts','conf.d'].each do |dir|
   directory "/etc/ganglia/#{dir}" do
     action :create
     owner "root"
@@ -49,25 +68,27 @@ end
 include_recipe 'opsworks_ganglia::monitor-fd-and-sockets'
 include_recipe 'opsworks_ganglia::monitor-disk'
 
-case node[:opsworks][:instance][:layers]
-when 'memcached'
-  include_recipe 'opsworks_ganglia::monitor-memcached'
-when 'db-master'
-  include_recipe 'opsworks_ganglia::monitor-mysql'
-when 'lb'
-  include_recipe 'opsworks_ganglia::monitor-haproxy'
-when 'php-app','monitoring-master'
-  include_recipe 'opsworks_ganglia::monitor-apache'
-when 'web'
-  include_recipe 'opsworks_ganglia::monitor-nginx'
-when 'rails-app'
-
-  case node[:opsworks][:rails_stack][:name]
-  when 'apache_passenger'
-    include_recipe 'opsworks_ganglia::monitor-passenger'
+node[:opsworks][:instance][:layers].each do |layer|
+  case layer
+  when 'memcached'
+    include_recipe 'opsworks_ganglia::monitor-memcached'
+  when 'db-master'
+    include_recipe 'opsworks_ganglia::monitor-mysql'
+  when 'lb'
+    include_recipe 'opsworks_ganglia::monitor-haproxy'
+  when 'php-app','monitoring-master'
     include_recipe 'opsworks_ganglia::monitor-apache'
-  when 'nginx_unicorn'
+  when 'web'
     include_recipe 'opsworks_ganglia::monitor-nginx'
-  end
+  when 'rails-app'
 
+    case node[:opsworks][:rails_stack][:name]
+    when 'apache_passenger'
+      include_recipe 'opsworks_ganglia::monitor-passenger'
+      include_recipe 'opsworks_ganglia::monitor-apache'
+    when 'nginx_unicorn'
+      include_recipe 'opsworks_ganglia::monitor-nginx'
+    end
+
+  end
 end

@@ -12,15 +12,18 @@ directory '/etc/ganglia-webfrontend' do
   mode '0755'
 end
 
-if platform_family?("rhel")
-  ["dwoo/compiled","dwoo/cache"].each do |dir|
-    directory "#{node[:ganglia][:datadir]}/#{dir}" do
-      owner node[:apache][:user]
-      group node[:apache][:group]
-      mode '0755'
-      recursive true
-    end
+["dwoo/compiled","dwoo/cache"].each do |dir|
+  directory "#{node[:ganglia][:datadir]}/#{dir}" do
+    owner node[:apache][:user]
+    group node[:apache][:group]
+    mode '0755'
+    recursive true
   end
+end
+
+if (node['ganglia']['web']['password'].blank? rescue true)
+  Chef::Log.error "Bailing out while configuring Ganglia Server. Password for ganglia webfrontend was not defined. Please set a non-empty password and try again."
+  exit 1
 end
 
 execute 'Update htpasswd secret' do
