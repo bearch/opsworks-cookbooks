@@ -29,5 +29,6 @@ sleep 10
 
 start_sidekiq_default_queue <%=@sidekiq_config_values[:rack_env] %> \
                                   <%=@pid_file_default%> \
-                                  <%=@sidekiq_config_values[:current_path]%>/config/sidekiq.yml
+                                  <%=@sidekiq_config_values[:current_path]%>/config/sidekiq.yml \
                                   <%=@sidekiq_config_values[:log_path]%>/sidekiq.log
+
