@@ -1,14 +1,23 @@
 #!/bin/bash
 
+function stop_sidekiq_for {
+  if [ -f $1 ]
+  then
+  kill -TERM `cat $1` || true
+  rm -rf $1
+  fi
+}
+
 cd <%= @sidekiq_config_values[:current_path] %>
 
+#Sidekiq Default
 <% @pid_file_default = "#{@sidekiq_config_values[:pids_path]}/sidekiq_default.pid" %>
 
-if [ -f <%=@pid_file_default%> ]
-then
-kill -TERM `cat <%=@pid_file_default%>` || true
-rm -rf <%=@pid_file_default%>
-fi
+stop_sidekiq_for <%=@pid_file_default %>
+
+
+#Sidekiq Enterprise Queue
+
 
 bundle exec sidekiq \
         -e <%=@sidekiq_config_values[:rack_env] %> \
