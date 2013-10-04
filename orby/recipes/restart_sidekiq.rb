@@ -18,13 +18,13 @@ node[:deploy].each do |application, deploy|
     owner deploy[:user]
 
     sidekiq_confiq_values = {
-        current_path: "#{ deploy[:deploy_to] }/current ",
-        install_path: "#{ deploy[:deploy_to] }/current/bin",
-        pids_path: "#{ deploy[:deploy_to] }/shared/pids/",
-        log_path: "#{ deploy[:deploy_to] }/shared/log/",
-        rack_env: "#{ deploy[:orby_config_values][:RACK_ENV] }"
+        :current_path => "#{ deploy[:deploy_to] }/current ",
+        :install_path => "#{ deploy[:deploy_to] }/current/bin",
+        :pids_path => "#{ deploy[:deploy_to] }/shared/pids/",
+        :log_path => "#{ deploy[:deploy_to] }/shared/log/",
+        :rack_env => "#{ deploy[:orby_config_values][:RACK_ENV] }"
     }
-    variables( sidekiq_config_values: sidekiq_confiq_values)
+    variables( :sidekiq_config_values => sidekiq_confiq_values)
 
     notifies :run, "execute[restart sidekiq #{application}]"
 
