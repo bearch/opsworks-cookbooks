@@ -8,6 +8,16 @@ function stop_sidekiq_for {
   fi
 }
 
+function start_sidekiq_default_queue {
+  bundle exec sidekiq \
+    -e $1 \
+    -P $2 \
+    -C $3 \
+    -L $4  \
+    -d \
+    -q default,notifier,importer
+}
+
 cd <%= @sidekiq_config_values[:current_path] %>
 
 #Sidekiq Default
@@ -16,14 +26,7 @@ cd <%= @sidekiq_config_values[:current_path] %>
 stop_sidekiq_for <%=@pid_file_default %>
 
 
-#Sidekiq Enterprise Queue
-
-
-bundle exec sidekiq \
-        -e <%=@sidekiq_config_values[:rack_env] %> \
-        -P <%=@pid_file_default%> \
-        -C <%=@sidekiq_config_values[:current_path]%>/config/sidekiq.yml \
-        -L <%=@sidekiq_config_values[:log_path]%>/sidekiq.log  \
-        -d \
-        -q default,notifier,importer
-
+start_sidekiq_default_queue <%=@sidekiq_config_values[:rack_env] %> \
+                                  <%=@pid_file_default%> \
+                                  <%=@sidekiq_config_values[:current_path]%>/config/sidekiq.yml
+                                  <%=@sidekiq_config_values[:log_path]%>/sidekiq.log
