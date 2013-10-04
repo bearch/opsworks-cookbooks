@@ -25,6 +25,7 @@ cd <%= @sidekiq_config_values[:current_path] %>
 
 stop_sidekiq_for <%=@pid_file_default %>
 
+sleep 10
 
 start_sidekiq_default_queue <%=@sidekiq_config_values[:rack_env] %> \
                                   <%=@pid_file_default%> \
