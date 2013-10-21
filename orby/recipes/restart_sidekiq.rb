@@ -4,6 +4,7 @@ node[:deploy].each do |application, deploy|
 
   execute "restart sidekiq #{application}" do
     cwd deploy[:current_path]
+    owner deploy[:user]
     command sidekiq_path
     action :nothing
   end
