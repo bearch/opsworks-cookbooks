@@ -17,6 +17,8 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     owner deploy[:user]
 
+    return unless deploy && deploy[:deploy_to]
+
     sidekiq_confiq_values = {
         :current_path => "#{ deploy[:deploy_to] }/current",
         :install_path => "#{ deploy[:deploy_to] }/current/bin",
