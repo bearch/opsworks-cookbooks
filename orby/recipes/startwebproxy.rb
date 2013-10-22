@@ -1,4 +1,4 @@
-bash "start_web_proxy" do
+bash "startwebproxy" do
   code <<-EOC
     cd /srv/www/mobile_web/current
     sudo nginx -s stop
