@@ -7,7 +7,7 @@ node[:deploy].each do |application, deploy|
     path "#{node[:nginx][:dir]}/nginx.conf"
     source "nginx.conf.erb"
 
-    variables(:web_proxy => deploy[:web_proxy])
+    variables(:vars => node[:nginx_vars])
 
     owner "root"
     group "root"

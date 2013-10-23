@@ -20,8 +20,8 @@ http {
     location /api {
       rewrite ^/api/(.*)$ /$1 break;
 
-      proxy_pass       http://core-staging-opsworks-501271382.us-east-1.elb.amazonaws.com/;
-      proxy_set_header Authorization "Basic <%= @web_proxy[:auth_token] %>";
+      proxy_pass       <%= @vars[:core_api_url] %>;
+      proxy_set_header Authorization "Basic <%= @vars[:auth_token] %>";
     }
 
     location / {
