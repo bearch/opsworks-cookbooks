@@ -13,12 +13,4 @@ node[:deploy].each do |application, deploy|
     group "root"
     mode 0644
   end
-
-  bash "startwebproxy" do
-    code <<-EOC
-    cd /srv/www/mobile_web/current
-    sudo bundle install
-    sudo rake minify
-EOC
-  end
 end
