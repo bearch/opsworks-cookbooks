@@ -24,9 +24,20 @@ http {
       proxy_set_header Authorization "Basic <%= @vars[:auth_token] %>";
     }
 
+    location /api-business {
+      rewrite ^/api/(.*)$ /$1 break;
+
+      proxy_pass       <%= @vars[:core_api_url] %>;
+    }
+
+    location /business-app {
+      index index.html;
+      root <%= @vars[:business_ui_dir] %>/public/;
+    }
+
     location / {
       index index.html;
-      root public/;
+      root <%= @vars[:web_ui_dir] %>/public/;
     }
   }
 }
