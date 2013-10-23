@@ -1,0 +1,32 @@
+events {
+  worker_connections  4096;  ## Default: 1024
+}
+
+http {
+  types {
+    text/html                             html htm shtml;
+    text/css                              css;
+    image/gif                             gif;
+    image/jpeg                            jpeg jpg;
+    image/svg+xml                         svg svgz;
+    application/x-javascript              js;
+  }
+
+  proxy_buffering off;
+
+  server {
+    listen       80 default_server;
+
+    location /api {
+      rewrite ^/api/(.*)$ /$1 break;
+
+      proxy_pass       http://core-staging-opsworks-501271382.us-east-1.elb.amazonaws.com/;
+      proxy_set_header Authorization "Basic <%= @web_proxy[:auth_token] %>";
+    }
+
+    location / {
+      index index.html;
+      root public/;
+    }
+  }
+}
