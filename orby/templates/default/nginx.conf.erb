@@ -27,17 +27,17 @@ http {
     location /api-business {
       rewrite ^/api/(.*)$ /$1 break;
 
-      proxy_pass       <%= @vars[:core_api_url] %>;
+      proxy_pass  <%= @vars[:core_api_url] %>;
     }
 
     location /business-app {
       index index.html;
-      root <%= @vars[:business_ui_dir] %>/public/;
+      alias <%= @vars[:business_ui_dir] %>/public;
     }
 
     location / {
       index index.html;
-      root <%= @vars[:web_ui_dir] %>/public/;
+      root <%= @vars[:web_ui_dir] %>/public;
     }
   }
 }
