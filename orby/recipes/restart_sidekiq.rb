@@ -5,9 +5,9 @@ node[:deploy].each do |application, deploy|
   execute "restart sidekiq #{application}" do
     cwd deploy[:current_path]
     command sidekiq_path
+    user "deploy"
     action :nothing
   end
-
 
   template sidekiq_path do
     source "restart_sidekiq_values.rb"
@@ -17,16 +17,7 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     owner deploy[:user]
 
-    puts "------------------------------------Here is the magic---------------------------"
-    puts "Deploy Values: #{deploy}"
-    puts "Deploy value for orby_config_values with symbol: #{deploy[:orby_config_values]}"
-    puts "Deploy value for orby_config_values with text: #{deploy['orby_config_values']}"    
-    puts "------------------------------------Here is the magic---------------------------"
-    
-    
     return unless deploy && deploy[:deploy_to] && deploy[:orby_config_values]
-
-    puts "Creating file..."
 
     sidekiq_confiq_values = {
         :current_path => "#{ deploy[:deploy_to] }/current",
@@ -38,8 +29,5 @@ node[:deploy].each do |application, deploy|
     variables( :sidekiq_config_values => sidekiq_confiq_values)
 
     notifies :run, "execute[restart sidekiq #{application}]"
-
   end
-
-
 end
