@@ -1,10 +1,10 @@
-munjal_path = "/home/deploy/.bundler/core/ruby/2.0.0/gems/bcrypt-ruby-3.1.1/ext/mri/"
+gem_path = File.dirname(`bundle exec gem which bcrypt`) + "/../ext/mri/"
 bash "install_bcrypt" do
   user "root"
-  cwd munjal_path
+  cwd gem_path
   code <<-EOC
     ruby extconf.rb
     make
     make install
   EOC
-end if File.exists?(munjal_path)
+end if File.exists?(gem_path)
