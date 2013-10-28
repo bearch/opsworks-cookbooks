@@ -6,6 +6,7 @@ node[:deploy].each do |application, deploy|
     cwd deploy[:current_path]
     command sidekiq_path
     action :nothing
+    user "deploy"
   end
 
 
@@ -31,8 +32,5 @@ node[:deploy].each do |application, deploy|
     variables( :sidekiq_config_values => sidekiq_confiq_values)
 
     notifies :run, "execute[restart sidekiq #{application}]"
-
   end
-
-
 end
