@@ -17,13 +17,6 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     owner deploy[:user]
 
-    puts "------------------------------------Here is the magic---------------------------"
-    puts "Deploy Values: #{deploy}"
-    puts "Deploy value for orby_config_values with symbol: #{deploy[:orby_config_values]}"
-    puts "Deploy value for orby_config_values with text: #{deploy['orby_config_values']}"    
-    puts "------------------------------------Here is the magic---------------------------"
-    
-    
     return unless deploy && deploy[:deploy_to] && deploy[:orby_config_values]
 
     puts "Creating file..."
