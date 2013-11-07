@@ -45,9 +45,9 @@ stop_sidekiq_for yelp_importer
 sleep 10
 
 start_sidekiq_default_queue <%= @sidekiq_config_values[:rack_env] %> \
-                            <%= @sidekiq_config_values[:pids_path]}%>/sidekiq_default.pid \
-                            <%= @sidekiq_config_values[:current_path]%>/config/sidekiq.yml \
-                            <%= @sidekiq_config_values[:log_path]%>/sidekiq.log
+                            <%= @sidekiq_config_values[:pids_path] %>/sidekiq_default.pid \
+                            <%= @sidekiq_config_values[:current_path] %>/config/sidekiq.yml \
+                            <%= @sidekiq_config_values[:log_path] %>/sidekiq.log
 
 start_sidekiq_special_queue enterprise_notifications
 start_sidekiq_special_queue app_store_notifications
