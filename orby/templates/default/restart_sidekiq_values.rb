@@ -25,8 +25,8 @@ function start_sidekiq_default_queue {
 function start_sidekiq_special_queue {
   bundle exec sidekiq \
       -e  <%= @sidekiq_config_values[:rack_env] %> \
-      -P "<%= @sidekiq_config_values[:pids_path] %>/sidekiq_$1" \
-      -L "<%= @sidekiq_config_values[:log_path] %>/sidekiq_$1"  \
+      -P "<%= @sidekiq_config_values[:pids_path] %>/sidekiq_$1.pid" \
+      -L "<%= @sidekiq_config_values[:log_path] %>/sidekiq_$1.log"  \
   -c 1 \
   -d \
   -q $1
@@ -45,7 +45,7 @@ stop_sidekiq_for yelp_importer
 sleep 10
 
 start_sidekiq_default_queue <%= @sidekiq_config_values[:rack_env] %> \
-                            <%= @pid_file_default%> \
+                            <%= @sidekiq_config_values[:pids_path]}%>/sidekiq_default.pid \
                             <%= @sidekiq_config_values[:current_path]%>/config/sidekiq.yml \
                             <%= @sidekiq_config_values[:log_path]%>/sidekiq.log
 
