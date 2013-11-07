@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function stop_sidekiq_for {
-    stop_sidekiq "<%= #{@sidekiq_config_values[:pids_path]} %>/sidekiq_$1.pid"
+    stop_sidekiq "<%= @sidekiq_config_values[:pids_path] %>/sidekiq_$1.pid"
 }
 
 function stop_sidekiq {
