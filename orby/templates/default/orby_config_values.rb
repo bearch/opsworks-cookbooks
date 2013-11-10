@@ -1,13 +1,13 @@
-ENV['BONSAI_URL'] = "<%= @orby_config_values[:BONSAI_URL] %>" if @orby_config_values[:BONSAI_URL]
-ENV['FOURSQUARE_CLIENT_ID'] = "<%= @orby_config_values[:FOURSQUARE_CLIENT_ID] %>" if @orby_config_values[:FOURSQUARE_CLIENT_ID]
-ENV['FOURSQUARE_CLIENT_SECRET'] = "<%= @orby_config_values[:FOURSQUARE_CLIENT_SECRET] %>" if @orby_config_values[:FOURSQUARE_CLIENT_SECRET]
-ENV['KEEN_MASTER_KEY'] = "<%= @orby_config_values[:KEEN_MASTER_KEY] %>" if @orby_config_values[:KEEN_MASTER_KEY]
-ENV['KEEN_PROJECT_ID'] = "<%= @orby_config_values[:KEEN_PROJECT_ID] %>" if @orby_config_values[:KEEN_PROJECT_ID]
-ENV['KEEN_READ_KEY'] = "<%= @orby_config_values[:KEEN_READ_KEY] %>" if @orby_config_values[:KEEN_READ_KEY]
-ENV['KEEN_WRITE_KEY'] = "<%= @orby_config_values[:KEEN_WRITE_KEY] %>" if @orby_config_values[:KEEN_WRITE_KEY]
-ENV['LOGGLY_URL'] = "<%= @orby_config_values[:LOGGLY_URL] %>" if @orby_config_values[:LOGGLY_URL]
-ENV['MONGOHQ_URL'] = "<%= @orby_config_values[:MONGOHQ_URL] %>" if @orby_config_values[:MONGOHQ_URL]
-ENV['NOTIFY_PHONES'] = "<%= @orby_config_values[:NOTIFY_PHONES] %>" if @orby_config_values[:NOTIFY_PHONES]
-ENV['RACK_ENV'] = "<%= @orby_config_values[:RACK_ENV] %>" if @orby_config_values[:RACK_ENV]
-ENV['REDIS_URL'] = "<%= @orby_config_values[:REDIS_URL] %>" if @orby_config_values[:REDIS_URL]
-ENV['WEB_PROXY_URL'] = "<%= @orby_config_values[:WEB_PROXY_URL] %>" if @orby_config_values[:WEB_PROXY_URL]
+ENV['BONSAI_URL'] = "<%= @orby_config_values[:BONSAI_URL] %>"
+ENV['FOURSQUARE_CLIENT_ID'] = "<%= @orby_config_values[:FOURSQUARE_CLIENT_ID] %>"
+ENV['FOURSQUARE_CLIENT_SECRET'] = "<%= @orby_config_values[:FOURSQUARE_CLIENT_SECRET] %>"
+ENV['KEEN_MASTER_KEY'] = "<%= @orby_config_values[:KEEN_MASTER_KEY] %>"
+ENV['KEEN_PROJECT_ID'] = "<%= @orby_config_values[:KEEN_PROJECT_ID] %>"
+ENV['KEEN_READ_KEY'] = "<%= @orby_config_values[:KEEN_READ_KEY] %>"
+ENV['KEEN_WRITE_KEY'] = "<%= @orby_config_values[:KEEN_WRITE_KEY] %>"
+ENV['LOGGLY_URL'] = "<%= @orby_config_values[:LOGGLY_URL] %>"
+ENV['MONGOHQ_URL'] = "<%= @orby_config_values[:MONGOHQ_URL] %>"
+ENV['NOTIFY_PHONES'] = "<%= @orby_config_values[:NOTIFY_PHONES] %>"
+ENV['RACK_ENV'] = "<%= @orby_config_values[:RACK_ENV] %>"
+ENV['REDIS_URL'] = "<%= @orby_config_values[:REDIS_URL] %>"
+ENV['WEB_PROXY_URL'] = "<%= @orby_config_values[:WEB_PROXY_URL] %>"

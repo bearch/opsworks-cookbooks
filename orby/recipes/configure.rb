@@ -15,7 +15,11 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     owner deploy[:user]
     
-    variables(:orby_config_values => deploy[:orby_config_values])
+    if deploy[:orby_config_values]
+      variables(:orby_config_values => deploy[:orby_config_values])
+    elsif deploy[:graphical_config_values]
+      variables(:orby_config_values => deploy[:graphical_config_values])
+    end
 
     #create sym link
     # link "#{deploy[:deploy_to]}/current/config/initializers/00_orby_config_values.rb" do
