@@ -41,6 +41,8 @@ stop_sidekiq_for app_store_notifications
 stop_sidekiq_for apns_worker
 stop_sidekiq_for foursquare_importer
 stop_sidekiq_for yelp_importer
+stop_sidekiq_for business_importer
+
 
 sleep 10
 
@@ -54,3 +56,4 @@ start_sidekiq_special_queue app_store_notifications
 start_sidekiq_special_queue apns_worker
 start_sidekiq_special_queue foursquare_importer
 start_sidekiq_special_queue yelp_importer
+start_sidekiq_special_queue business_importer
