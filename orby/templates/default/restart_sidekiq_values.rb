@@ -19,7 +19,7 @@ function start_sidekiq_default_queue {
     -C $3 \
     -L $4  \
     -d \
-    -q notifier,importer,default
+    -q notifier -q importer -q default
 }
 
 function start_sidekiq_special_queue {
