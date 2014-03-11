@@ -42,6 +42,7 @@ stop_sidekiq_for apns_worker
 stop_sidekiq_for foursquare_importer
 stop_sidekiq_for yelp_importer
 stop_sidekiq_for business_importer
+stop_sidekiq_for address_book_sync
 
 
 sleep 10
@@ -57,3 +58,4 @@ start_sidekiq_special_queue apns_worker
 start_sidekiq_special_queue foursquare_importer
 start_sidekiq_special_queue yelp_importer
 start_sidekiq_special_queue business_importer
+start_sidekiq_special_queue address_book_sync
