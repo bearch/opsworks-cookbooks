@@ -52,6 +52,7 @@ start_sidekiq_default_queue <%= @sidekiq_config_values[:rack_env] %> \
                             <%= @sidekiq_config_values[:current_path] %>/config/sidekiq.yml \
                             <%= @sidekiq_config_values[:log_path] %>/sidekiq.log
 
+start_sidekiq_special_queue default
 start_sidekiq_special_queue enterprise_notifications
 start_sidekiq_special_queue app_store_notifications
 start_sidekiq_special_queue apns_worker
